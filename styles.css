@@ -1,0 +1,133 @@
+/*
+ * styles.css — the page around the toy.
+ *
+ * The page is deliberately quiet: one object on an empty cream field, with
+ * everything else reading as a caption. All colour lives in custom properties
+ * at :root so the page can be retinted in one place.
+ */
+/* Layout: one object on an empty cream field. Everything else is a quiet caption. */
+:root{
+  --cream:#f7f1e4;
+  --cream2:#efe7d6;
+  --ink:#3d372d;
+  --mute:#8d8575;
+  --faint:#b7ae9c;
+  --mint:#86907F;
+  --line:#e2d9c6;
+  --font:"Quicksand",system-ui,-apple-system,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{
+  margin:0;
+  font-family:var(--font);
+  font-weight:500;
+  color:var(--ink);
+  background:var(--cream);
+}
+.stage{
+  max-width:890px;margin:0 auto;
+  padding-inline:16px;padding-block:30px 56px;
+  display:flex;flex-direction:column;align-items:center;gap:16px;
+}
+h1{
+  font-weight:600;
+  font-size:clamp(17px,4vw,21px);
+  letter-spacing:.005em;
+  margin:0;text-align:center;text-wrap:balance;
+}
+.sub{
+  margin:0;font-size:13px;font-weight:500;color:var(--mute);
+  text-align:center;text-wrap:balance;max-width:40ch;
+}
+
+/* ---- 3D viewport ---- */
+.viewport{
+  position:relative;
+  width:min(100%,517px);
+  aspect-ratio:1/1.26;
+  margin-top:4px;
+  touch-action:none;
+  cursor:grab;
+}
+.viewport.grabbing{cursor:grabbing}
+.layout{
+  display:flex;gap:26px;align-items:flex-start;justify-content:center;
+  flex-wrap:wrap;width:100%;
+}
+.collection{
+  width:min(100%,284px);display:flex;flex-direction:column;gap:9px;padding-top:10px;
+}
+.collection h2{
+  margin:0;font-size:11px;font-weight:700;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--faint);
+}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.grid.shells{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.collection hr{border:0;border-top:1px solid var(--line);margin:4px 0 2px}
+.chipcard canvas{width:54px;height:64px}
+.chipcard b{font-size:9px}
+.card{
+  -webkit-tap-highlight-color:transparent;
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  background:#fffbf2;border:1.5px solid var(--line);border-radius:13px;
+  padding:9px 4px 8px;cursor:pointer;font:inherit;min-width:0;
+  transition:border-color .15s,background .15s,transform .1s;
+}
+.card:hover{border-color:var(--mint);transform:translateY(-1px)}
+.card:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.card[aria-pressed="true"]{border-color:var(--mint);background:#ecfaf5;box-shadow:inset 0 0 0 1.5px var(--mint)}
+.card canvas{width:44px;height:55px;display:block;image-rendering:pixelated}
+.card b{
+  font-size:8.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--ink);text-align:center;line-height:1.2;
+}
+.card.locked canvas{filter:grayscale(1);opacity:.3}
+.card.locked b{color:var(--faint)}
+.hint{margin:0;font-size:10.5px;line-height:1.5;color:var(--faint)}
+.viewport canvas{display:block;width:100%;height:100%}
+.fallback{
+  position:absolute;inset:0;display:none;
+  flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  padding:20px;text-align:center;
+}
+.fallback.on{display:flex}
+.fallback canvas{
+  width:min(100%,300px);height:auto;
+  image-rendering:pixelated;image-rendering:crisp-edges;
+  border:6px solid #3a4a52;border-radius:8px;
+}
+.fallback p{margin:0;font-size:12px;color:var(--mute)}
+
+/* ---- caption ---- */
+.keys{
+  display:flex;flex-wrap:wrap;justify-content:center;
+  gap:4px 16px;font-size:12.5px;color:var(--mute);margin-top:6px;
+}
+.keys b{color:var(--ink);font-weight:600}
+kbd{
+  font-family:var(--font);font-size:11px;font-weight:600;color:var(--ink);
+  background:var(--cream2);border:1px solid var(--line);
+  border-radius:5px;padding:1px 5px;
+}
+.toggles{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:4px}
+.tg{
+  -webkit-tap-highlight-color:transparent;
+  font-family:var(--font);font-size:12px;font-weight:600;color:var(--mute);
+  background:transparent;border:1.5px solid var(--line);
+  border-radius:999px;padding:6px 14px;cursor:pointer;
+  transition:color .15s,background .15s,border-color .15s;
+}
+.tg:hover{color:var(--ink);border-color:var(--faint)}
+.tg[aria-pressed="true"]{background:var(--mint);border-color:var(--mint);color:#f8fdfb}
+.tg:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.note{
+  margin:14px 0 0;max-width:46ch;text-align:center;
+  font-size:12px;line-height:1.6;color:var(--faint);
+}
+.note code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:11px;color:var(--mint);
+}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}

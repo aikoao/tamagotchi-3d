@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Punggol Heritage Tamagotchi</title>
+<meta name="description" content="A playable virtual Tamagotchi that raises a kampong child into a skilled Punggol resident, built with vanilla JavaScript, Three.js and a hand-written pixel renderer.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+
+<!-- Three.js is a classic script, so it publishes window.THREE for every
+     module. Swapping it for an ES module build would mean one import line
+     in src/device3d.js and no other change. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+<div class="stage">
+  <h1>Punggol Heritage Tamagotchi</h1>
+
+  <div class="layout">
+    <!-- The 3D toy mounts its own canvas here; #fallback is shown instead
+         when WebGL is unavailable. -->
+    <div class="viewport" id="viewport">
+      <div class="fallback" id="fallback">
+        <canvas id="flat" width="112" height="96"></canvas>
+        <p>Drag to turn &middot; tap the buttons</p>
+      </div>
+    </div>
+
+    <aside class="collection">
+      <h2>Characters</h2>
+      <div class="grid" id="collection"></div>
+      <hr>
+      <h2>Tamagotchi design</h2>
+      <div class="grid shells" id="shells"></div>
+    </aside>
+  </div>
+
+  <div class="keys">
+    <span><kbd>&larr;</kbd> <b>Select</b></span>
+    <span><kbd>Enter</kbd> <b>Confirm</b></span>
+    <span><kbd>&rarr;</kbd> <b>Back</b></span>
+    <span><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> <b>Scan a station</b></span>
+  </div>
+
+  <div class="toggles">
+    <button class="tg" id="tgDemo" type="button" aria-pressed="true">Demo speed</button>
+    <button class="tg" id="tgSound" type="button" aria-pressed="true">Sound</button>
+    <button class="tg" id="tgGrow" type="button">Grow up</button>
+    <button class="tg" id="tgReset" type="button">Start over</button>
+  </div>
+
+  <p class="note">Drag to turn the toy. Each trail station has its own QR code &mdash; press <kbd>1</kbd>&ndash;<kbd>3</kbd> to simulate a scan, or open the page at <code>#rubber</code>, <code>#kelong</code> or <code>#point</code>.</p>
+</div>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
